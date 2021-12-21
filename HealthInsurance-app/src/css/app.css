@@ -1,0 +1,31 @@
+.chairPersonButtons{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 80px !important;
+}
+
+.claim_row{
+    outline: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 2pt;
+}
+
+#chairPersonCollapse{
+    margin: 8px !important;
+}
+
+#customerDiv{
+    margin: 30px !important;
+}
+
+#staffDiv{
+    margin: 30px !important;
+}
+
+.navbar{
+    background-color: powderblue !important;
+}
+
+body{
+    background-color: whitesmoke;
+}

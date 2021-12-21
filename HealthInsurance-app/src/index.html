@@ -1,0 +1,284 @@
+<head>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css" >
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light" >
+        <a class="navbar-brand text-center" style="flex:auto;font-size: xxx-large;" href="#">
+          The Health Company
+        </a>
+    </nav>
+
+    <div class="row justify-content-md-center">
+        <p id="decentralized_address" class="font-italic" style="margin-top: 60px;"> Your decentralized address : </p>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <select id="positionDropdown" onchange="updatePositions()" class="custom-select custom-select-lg col-md-6">
+            <option selected>Select your role : </option>
+            <option value="admin">Admin</option>
+            <option value="insuranceCompany">Insurance Company</option>
+            <option value="customer">Customer</option>
+            <option value="public">Public</option>
+        </select>
+    </div>
+
+    <!-- <div id="chairPersonDiv" style="display:none">
+        <div class="row justify-content-md-center" >
+            <button class="btn btn-primary col-md-2 chairPersonButtons" type="button" onClick="buttonChairPersonRegisterStaff()"  data-toggle="collapse" data-target="#chairPersonCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Register Staff
+            </button>
+            <button class="btn btn-primary col-md-2 chairPersonButtons" type="button" onClick="buttonChairPersonUnregisterStaff()" data-toggle="collapse" data-target="#chairPersonCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Unregister Staff
+            </button>
+            <button class="btn btn-primary col-md-2 chairPersonButtons" type="button" onClick="buttonChairPersonRegisterCustomer()" data-toggle="collapse" data-target="#chairPersonCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Register Customer
+            </button>
+            <button class="btn btn-primary col-md-2 chairPersonButtons" type="button" onClick="buttonChairPersonUnregisterCustomer()" data-toggle="collapse" data-target="#chairPersonCollapse" aria-expanded="false" aria-controls="collapseExample">
+                Unregister Customer
+            </button>
+        </div>
+        <div class="collapse row justify-content-md-center " id="chairPersonCollapse">
+            <div class="card card-body " id="chairPersonForm">
+            </div>
+        </div>
+    </div> -->
+
+    <div id="adminDiv" style="display:none">
+        <div class="card card-body justify-content-md-center">
+            <div>
+                <div class="form-group row justify-content-md-center" style="margin-top:20px">
+                    <p class="font-italic" > Register/Unregister Insurance Companies Here! </p>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="admin_reg_insur_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="register(document.getElementById('admin_reg_insur_addr').value,'insuranceCompany')">Register Insurance Company</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="admin_unreg_insur_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="unregister(document.getElementById('admin_unreg_insur_addr').value,'insuranceCompany')">Unregister Insurance Company</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div>
+                <div class="form-group row justify-content-md-center" style="margin-top:20px">
+                    <p class="font-italic" > Register/Unregister Customers Here! </p>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="admin_reg_customer_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="register(document.getElementById('admin_reg_customer_addr').value,'customer')">Register Customer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="admin_unreg_customer_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="unregister(document.getElementById('admin_unreg_customer_addr').value,'customer')">Unregister Customer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="insuranceCompanyDiv" style="display:none">
+        <div class="card card-body justify-content-md-center">
+            <div>
+                <div class="form-group row justify-content-md-center">
+                    <p class="font-italic" > Hello Insurance Company member! Please review below claims </p>
+                </div>
+                <div id="claimsBox" class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="ID" class="col-sm-1 col-form-label">ID</label>
+                        <label for="Address" class="col-sm-2 col-form-label">Address</label>
+                        <label for="Name" class="col-sm-1 col-form-label">Name</label>
+                        <label for="InsuranceCompany" class="col-sm-1 col-form-label">Insurance Company</label>
+                        <label for="Hospital" class="col-sm-1 col-form-label">Hospital</label>
+                        <label for="Description" class="col-sm-2 col-form-label">Description</label>
+                        <label for="Tokens" class="col-sm-1 col-form-label">Tokens</label>
+                        <label for="blank" class="col-sm-3 col-form-label"> </label>
+                        <label for="blank" class="col-sm-3 col-form-label"> </label>
+                    </div>
+                </div>
+                
+            </div>
+            <hr/>
+            <div>
+                <div class="form-group row justify-content-md-center" style="margin-top:20px">
+                    <p class="font-italic" > Register/Unregister Customers Here! </p>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="insur_reg_customer_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="register(document.getElementById('insur_reg_customer_addr').value,'customer')">Register Customer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="insur_unreg_customer_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="unregister(document.getElementById('insur_unreg_customer_addr').value,'customer')">Unregister Customer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+            <div>
+                <div class="form-group row justify-content-md-center" style="margin-top:20px">
+                    <p class="font-italic" > Add/Remove Hospitals Here! </p>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="insur_reg_hospital_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="register(document.getElementById('insur_reg_hospital_addr').value,'hospital')">Add hospital</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-body justify-content-md-center">
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-10">
+                            <input class="form-control" id="insur_unreg_hospital_addr" placeholder="Enter address">
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary" onclick="unregister(document.getElementById('insur_unreg_hospital_addr').value,'hospital')">Remove Hospital</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="customerDiv" style="display:none">
+
+        <div class="card card-body justify-content-md-center">
+            <div>
+                <div class="form-group row justify-content-md-center">
+                    <p class="font-italic" > Please fill out your claim details </p>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="customer_name" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="InsuranceID" class="col-sm-2 col-form-label">Insurance Company</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="customer_insuranceCompany" placeholder="Insurance Company Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="InsuranceID" class="col-sm-2 col-form-label">Hospital</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="customer_hospital" placeholder="Hospital Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Description" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="customer_description" placeholder="Description">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="n_tokens" class="col-sm-2 col-form-label">HBEATS to be requested</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="customer_n_tokens" placeholder="Enter number of tokens">
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary" onclick="saveClaimDetails()">Submit claim</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div id="publicDiv" style="display:none">
+        
+        <div class="card card-body justify-content-md-center">
+            <div>
+                <div class="form-group row justify-content-md-center">
+                    <p class="font-italic" >You are public. You can check registered hospitals for Inutrance companies here by address</p>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-2 col-form-label">Insurance Company</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="pub_insurance_company" placeholder="Insurance Company address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="InsuranceID" class="col-sm-2 col-form-label">Hospital</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="pub_hospital" placeholder="Hospital Address">
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary" onclick="checkHospital()">Check</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+<script src="js/app.js"></script>
